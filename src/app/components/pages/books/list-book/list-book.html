@@ -1,0 +1,38 @@
+<h4>Livros</h4>
+<hr />
+
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Gênero</th>
+                <th>Autor</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of books">
+                <td>{{ c.title }}</td>
+                <td>{{ c.category.description }}</td>
+                <td>{{ c.author.name }}</td>
+                <td>
+                    <button class="btn btn-sm text-primary me-2" [routerLink]="['/pages/books/update-book', c.id]"
+                        title="Editaraa">
+                        <i class="bi bi-pencil-square fs-5"></i>
+                    </button>
+
+                    <button class="btn btn-sm text-danger" (click)="onDelete(c.id)" title="Excluir">
+                        <i class="bi bi-trash fs-5"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-12">
+    <button type="button" class="btn btn-success" routerLink="/pages/books/create-book">
+        Cadastrar
+    </button>
+</div>

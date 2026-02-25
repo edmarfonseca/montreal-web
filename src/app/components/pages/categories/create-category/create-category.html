@@ -1,0 +1,32 @@
+<h4>Gêneros</h4>
+<hr />
+
+<div *ngIf="mensagemSucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Sucesso!</strong> {{ mensagemSucesso }}
+    <button (click)="mensagemSucesso = ''" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Erro!</strong> {{ mensagemErro }}
+    <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" class="form-control" formControlName="description"
+                placeholder="Digite um novo gênero aqui" />
+            <div class="text-danger" *ngIf="f['description'].touched&& f['description'].invalid">
+                Por favor, informe a descrição do gênero de 5 a 100 caracteres.
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Realizar Cadastro" [disabled]="form.invalid" />
+        </div>
+    </div>
+
+</form>

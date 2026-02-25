@@ -1,0 +1,58 @@
+<h4>Livros</h4>
+<p>Edição do livro</p>
+<hr />
+
+<div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Erro!</strong> {{ mensagemErro }}
+    <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label"><strong>Título</strong></label>
+            <input type="text" class="form-control" formControlName="title" placeholder="Digite um título" />
+            <div class="text-danger" *ngIf="f['title'].touched&& f['title'].invalid">
+                Por favor, informe o título do livro de 5 a 100 caracteres.
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label"><strong>Gênero</strong></label>
+            <select class="form-select" formControlName="categoryId">
+                <option value="">Selecione um gênero</option>
+                <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.description }}
+                </option>
+            </select>
+            <div class="text-danger" *ngIf="f['categoryId'].touched && f['categoryId'].invalid">
+                Por favor, selecione um gênero.
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label"><strong>Autor</strong></label>
+            <select class="form-select" formControlName="authorId">
+                <option value="">Selecione um autor</option>
+                <option *ngFor="let author of authors" [value]="author.id">
+                    {{ author.name }}
+                </option>
+            </select>
+            <div class="text-danger" *ngIf="f['authorId'].touched && f['authorId'].invalid">
+                Por favor, selecione um autor.
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Salvar Alterações" [disabled]="form.invalid" />
+        </div>
+    </div>
+
+</form>
